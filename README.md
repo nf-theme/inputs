@@ -13,7 +13,7 @@
 
 ### Clone repository
 ```
-git clone https://github.com/hieu-pv/inputs.git 
+git clone https://github.com/nf-theme/inputs.git 
 ```
 
 <a name="configuration"></a>
