@@ -20,7 +20,7 @@ git clone https://github.com/nf-theme/inputs.git
 
 ### Update your information
 
-If you want provide some function that is bootstrapped when wordpress start, we will register them in `src/ExtensionKitServiceProvider.php`
+If you want provide some function that is bootstrapped when wordpress start, we will register them in `src/InputsServiceProvider.php`
 
 > For example: register css/js file
 
