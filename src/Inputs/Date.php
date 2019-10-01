@@ -26,7 +26,10 @@ class Date extends Input
      * {@inheritDoc}
      */
     public $description = '';
-
+    /**
+     * {@inheritDoc}
+     */
+    public $required = false;
     /**
      * {@inheritDoc}
      */

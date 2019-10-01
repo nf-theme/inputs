@@ -45,13 +45,13 @@ class Checkbox extends Input
 
     public function render()
     {
-        $checked = $this->attributes['checked'] ? 'checked' : '';
+        $checked = $this->attributes['checked'] ? 'checked="checked"' : '';
         if ($this->required) {
             $html = <<<EOF
 <div class="form-group group-checkbox group-checkbox-{$this->name} checkbox-{$this->attributes['class']}">
     <label>{$this->label}</label>
     <div class="group-type">
-        <input type="checkbox" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" required  ><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
+        <input type="checkbox" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" required {$checked} ><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
     </div>
 </div>
 EOF;
@@ -60,7 +60,7 @@ EOF;
 <div class="form-group group-checkbox group-checkbox-{$this->name} checkbox-{$this->attributes['class']}">
     <label>{$this->label}</label>
     <div class="group-type">
-        <input type="checkbox" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" ><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
+        <input type="checkbox" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" {$checked} ><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
     </div>
 </div>
 EOF;
@@ -73,7 +73,7 @@ EOF;
         $html = <<<EOF
 <div class="form-group group-checkbox group-checkbox-{$this->name} checkbox-{$this->attributes['class']}">
     <label>{$this->label}</label>
-    <input type="checkbox" class="form-control meta" name="{$this->name}" value="{$this->value}">
+    <input type="checkbox" class="form-control meta" name="{$this->name}" value="{$this->value}" {$checked}>
 </div>
 EOF;
         return $html;

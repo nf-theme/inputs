@@ -19,6 +19,7 @@ use Vicoders\Input\Inputs\Text;
 use Vicoders\Input\Inputs\Textarea;
 use Vicoders\Input\Inputs\Radio;
 use Vicoders\Input\Inputs\Checkbox;
+use Vicoders\Input\Inputs\File;
 
 class Manager
 {
@@ -192,6 +193,13 @@ class Manager
                 $input->required    = isset($field['required']) ? $field['required'] : $input->required;
                 $input->format      = isset($field['format']) ? $field['format'] : $input->format;
                 $input->attributes  = isset($field['attributes']) ? $field['attributes'] : $input->attributes;
+                break;
+            case Input::FILE:
+                $input              = new File();
+                $input->label       = isset($field['label']) ? $field['label'] : $input->label;
+                $input->name        = isset($field['name']) ? $field['name'] : $input->name;
+                $input->description = isset($field['description']) ? $field['description'] : $input->description;
+                $input->required    = isset($field['required']) ? $field['required'] : $input->required;
                 break;
             case Input::SUBMIT:
                 $input             = new Submit();
