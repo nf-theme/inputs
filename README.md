@@ -1,6 +1,5 @@
-# Extension Kit
- > It's an extension kit for our theme https://github.com/hieu-pv/nf-theme 
- 
+# Inputs
+
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Compile asset file](#compiler)
@@ -14,14 +13,14 @@
 
 ### Clone repository
 ```
-git clone https://github.com/hieu-pv/nf-extension-kit.git 
+git clone https://github.com/nf-theme/inputs.git 
 ```
 
 <a name="configuration"></a>
 
 ### Update your information
 
-If you want provide some function that is bootstrapped when wordpress start, we will register them in `src/ExtensionKitServiceProvider.php`
+If you want provide some function that is bootstrapped when wordpress start, we will register them in `src/InputsServiceProvider.php`
 
 > For example: register css/js file
 
@@ -31,7 +30,7 @@ then in `config/app.php` of the theme we have to register service provider
 ```php
   'providers'  => [
         // .... Others providers 
-        \NightFury\ExtensionKit\ExtensionKitServiceProvider::class,
+        \Vicoders\input\InputsServiceProvider::class,
     ],
 ```
 
@@ -73,14 +72,14 @@ npm run watch
 <a name="service"></a>
 ## Service
 
-Blade is the simple, yet powerful templating engine provided with this kit. You can use it via NightFury\ExtensionKit\Facades\View 
+Blade is the simple, yet powerful templating engine provided with this kit. You can use it via Vicoders\input\Facades\View 
 
 > {tip} Blade file are located in `/resources/views`
 
 For example we have a file `/resources/views/example.blade.php` then we can use this file by following code
 
 ```
-echo NightFury\ExtensionKit\Facades\View::render('example', ['data' => 'some test data here']);
+echo Vicoders\input\Facades\View::render('example', ['data' => 'some test data here']);
 ```
 
 For more information about blade engine [https://laravel.com/docs/5.5/blade](https://laravel.com/docs/5.5/blade)
@@ -112,11 +111,11 @@ For example
 ```
     {
         "require": {
-            "nf/extension-kit": "dev-master"
+            "Vicoders\input": "dev-master"
         },
         "repositories": [{
             "type": "path",
-            "url": "../../../../nf-extension-kit" // use relative path here
+            "url": "../../../../inputs" // use relative path here
         }]
     }
 ```
@@ -129,80 +128,127 @@ In some case we need some configuration from user, we can use `nf/theme-option` 
 
 Checkout package repository for install and supported field [https://github.com/hieu-pv/nf-theme-option](https://github.com/hieu-pv/nf-theme-option)
 
-##### Register option scheme in your service provider `src/ExtensionKitServiceProvider.php`
+##### Register option scheme in your service provider `src/InputsServiceProvider.php`
 
 ```php
-use use NightFury\Option\Abstracts\Input;
+use Vicoders\Input\Abstracts\Type;
+use Vicoders\Input\Facades\ContactFormManager;
+use Vicoders\Input\Abstracts\Input;
 
-\NightFury\Option\Facades\ThemeOptionManager::add([
-    'name'   => 'Exetension Kit',
-    'fields' => [
-        [
-            'label'    => 'Text',
-            'name'     => 'theme_option_text',
-            'type'     => Input::TEXT,
-            'required' => true,
-        ],
-        [
-            'label'    => 'Textarea',
-            'name'     => 'theme_option_textarea',
-            'type'     => Input::TEXTAREA,
-            'required' => true,
-        ],
-        [
-            'label'    => 'Email',
-            'name'     => 'theme_option_email',
-            'type'     => Input::EMAIL,
-            'required' => true,
-        ],
-        [
-            'label'       => 'Gallery',
-            'name'        => 'theme_option_gallery',
-            'type'        => Input::GALLERY,
-            'description' => 'We can select multi file. Drag and Drop to re-order content',
-        ],
-        [
-            'label'       => 'Gallery With Meta Field',
-            'name'        => 'theme_option_gallery_with_meta',
-            'type'        => Input::GALLERY,
-            'description' => 'Gallery with meta field, for now we support text and textarea on meta field.',
-            'meta'        => [
-                [
-                    'label' => 'Text',
-                    'name'  => 'meta_text',
-                    'type'  => Input::TEXT,
-                ],
-                [
-                    'label' => 'Textarea',
-                    'name'  => 'meta_textarea',
-                    'type'  => Input::TEXTAREA,
-                ],
-            ],
-        ], [
-            'label'       => 'Image',
-            'name'        => 'theme_option_image',
-            'type'        => Input::IMAGE,
-            'description' => 'Choose your image by clicking the button bellow',
-        ],
-        [
-            'label'   => 'Select',
-            'name'    => 'theme_option_select',
-            'type'    => Input::SELECT,
-            'options' => [
-                [
-                    'value'    => 'first',
-                    'label'    => 'First Value',
-                    'selected' => true,
-                ],
-                [
-                    'value'    => 'second',
-                    'label'    => 'Second Value',
-                    'selected' => false,
-                ],
-            ],
-        ],
-    ],
-]);
+ContactFormManager::add([
+	'name' => 'register-form',
+	'type' => Type::CONTACT,
+	'style' => 'form-2',
+	'email_enable' => true, /* default - false */
+	'email_variables' => [
+		'name' => 'NAME_FIELD',
+		'email' => 'EMAIL_FIELD',
+	],
+	'email_config' => [
+		'domain_api' => 'http://sendmail.vicoders.com/',
+		'mail_host' => 'HOST MAIL',
+		'mail_port' => 'PORT',
+		'mail_from' => 'EMAIL_FROM',
+		'mail_name' => 'YOUR NAME',
+		'mail_username' => 'EMAIL SEND',
+		'mail_password' => 'EMAIL PASSWORD',
+		'mail_encryption' => 'tls',
+	],
+	'email_template' => [
+		[
+			'name' => 'Template 1',
+			'path' => 'PATH_TO_HTML_TEMPLATE',
+			'params' => [
+				'name_author' => 'Garung 123',
+				'post_title' => 'this is title 123',
+				'content' => 'this is content 123',
+				'link' => 'http://google.com',
+				'site_url' => site_url(),
+			],
+		],
+		[
+			'name' => 'Template 2',
+			'path' => 'PATH_TO_HTML_TEMPLATE',
+			'params' => [
+				'example_variable' => 'demo',
+			],
+		],
+	],
+	'status' => [
+		[
+			'id' => 1,
+			'name' => 'pending',
+			'is_default' => true,
+		],
+		[
+			'id' => 2,
+			'name' => 'confirmed',
+			'is_default' => false,
+		],
+		[
+			'id' => 3,
+			'name' => 'cancel',
+			'is_default' => false,
+		],
+		[
+			'id' => 4,
+			'name' => 'complete',
+			'is_default' => false,
+		],
+	],
+	'fields' => [
+		[
+			'label' => 'Full name',
+			'name' => 'full_name', // the key of option
+			'type' => Input::TEXT,
+			'attributes' => [
+				'required' => true,
+				'class' => 'name-input',
+				'placeholder' => '',
+			],
+		],
+		[
+			'label' => 'Gender:',
+			'name' => 'gender', // the key of option
+			'type' => Input::RADIO,
+			'attributes' => [
+				'class' => 'gender-male',
+				'placeholder' => '',
+				'value' => 'male',
+				'checked' => true,
+				'text'  => 'Male'
+			],
+		],
+		[
+			'label' => '',
+			'name' => 'gender', // the key of option
+			'type' => Input::RADIO,
+			'attributes' => [
+				'class' => 'gender-female',
+				'placeholder' => '',
+				'value' => 'female',
+				'checked' => false,
+				'text'  => 'female'
+			],
+		],
+		[
+			'label' => 'Date of birth:',
+			'name' => 'day', // the key of option
+			'type' => Input::DATE,
+
+			'attributes' => [
+				'required' => true,
+				'class' => 'day',
+				'placeholder' => 'dd/mm/yyyy',
+			],
+		],
+		[
+			'value' => 'Register',
+			'type' => Input::SUBMIT,
+			'attributes' => [
+				'class' => 'send btn-register',
+			],
+		],
 ```
 
 
