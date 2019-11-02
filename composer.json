@@ -1,7 +1,6 @@
 {
     "name": "nf/input",
-    "version": "1.0.0",
-    "description": "NF Input",
+    "description": "Input Package for NF Theme",
     "license": "MIT",
     "authors": [{
         "name": "Hieupv",
@@ -14,6 +13,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "nf/core": ">=2.0"
+        "nf/core": "^2.0"
     }
 }

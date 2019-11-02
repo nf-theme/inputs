@@ -41,14 +41,26 @@ class Email extends Input
     public function render()
     {
         $value = get_option($this->name, '');
-        $html  = <<<EOF
-<div class="form-group group-email group-email-{$this->name}">
-    <div class="group-wrap">
-        <label>{$this->label}</label>
-        <input type="email" class="form-control input-value" name="{$this->name}" value="{$value}">
-    </div>
-</div>
+        if ($this->required) {
+            $html  = <<<EOF
+            <div class="form-group group-email group-email-{$this->name}">
+                <div class="group-wrap">
+                    <label>{$this->label}</label>
+                    <input type="email" class="form-control input-value" name="{$this->name}" value="{$value}" required>
+                </div>
+            </div>
 EOF;
+        }
+        else {
+             $html  = <<<EOF
+            <div class="form-group group-email group-email-{$this->name}">
+                <div class="group-wrap">
+                    <label>{$this->label}</label>
+                    <input type="email" class="form-control input-value" name="{$this->name}" value="{$value}">
+                </div>
+            </div>
+EOF;
+        }
         return $html;
     }
 

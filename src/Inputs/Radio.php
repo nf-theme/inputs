@@ -45,7 +45,7 @@ class Radio extends Input
 
     public function render()
     {
-        $checked = $this->attributes['checked'] ? 'checked' : '';
+        $checked = $this->attributes['checked'] ? 'checked="checked"' : '';
         if ($this->required) {
             if ($this->attributes['rtl']) {
                 $html = <<<EOF
@@ -53,7 +53,7 @@ class Radio extends Input
     <label>{$this->label}</label>
     <span class="group-type">
         <span class="text">{$this->attributes['text']}</span>
-        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" required  ><span class="bg"></span>
+        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" required {$checked} ><span class="bg"></span>
     </span>
 </div>
 EOF;
@@ -64,7 +64,7 @@ EOF;
     <label>{$this->label}</label>
     <span class="group-type">
         
-        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" required  ><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
+        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" required {$checked} ><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
     </span>
 </div>
 EOF;
@@ -78,7 +78,7 @@ EOF;
     <label>{$this->label}</label>
     <span class="group-type">
         <span class="text">{$this->attributes['text']}</span>
-        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}"><span class="bg"></span>
+        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" {$checked}><span class="bg"></span>
     </span>
 </div>
 EOF;
@@ -89,7 +89,7 @@ EOF;
     <label>{$this->label}</label>
     <span class="group-type">
         
-        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}"><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
+        <input type="radio" class="form-control" name="{$this->name}" value="{$this->attributes['value']}" {$checked}><span class="bg"></span><span class="text">{$this->attributes['text']}</span>
     </span>
 </div>
 EOF;
@@ -103,7 +103,7 @@ EOF;
         $html = <<<EOF
 <div class="form-group group-radio group-radio-{$this->name} radio-{$this->attributes['class']}">
     <label>{$this->label}</label>
-    <input type="radio" class="form-control meta" name="{$this->name}" value="{$this->value}">
+    <input type="radio" class="form-control meta" name="{$this->name}" value="{$this->value}" {$checked}>
 </div>
 EOF;
         return $html;

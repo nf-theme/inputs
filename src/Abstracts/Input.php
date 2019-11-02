@@ -17,6 +17,7 @@ abstract class Input implements InputInterface
     const TEXTAREA = 'textarea';
     const DATETIME = 'datetime';
     const DATE     = 'date';
+    const FILE     = 'file';
     const SUBMIT   = 'submit';
 
     /**
