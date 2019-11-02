@@ -13,6 +13,6 @@
     },
     "minimum-stability": "dev",
     "require": {
-        "nf/core": "^3.0"
+        "nf/core": "^3.0" 
     }
 }
